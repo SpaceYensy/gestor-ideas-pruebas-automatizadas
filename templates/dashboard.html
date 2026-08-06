@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Ideas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="contenedor">
+        <div class="encabezado">
+            <h2>Gestor de Ideas</h2>
+            <p>Hola, {{ usuario }} - <a href="{{ url_for('logout') }}">Cerrar sesion</a></p>
+        </div>
+
+        <form method="GET" class="form-buscar">
+            <input type="text" name="buscar" id="buscar" placeholder="Buscar idea..." value="{{ buscar }}">
+            <button type="submit" id="btn-buscar">Buscar</button>
+        </form>
+
+        {% if error %}
+            <p class="error" id="mensaje-error">{{ error }}</p>
+        {% endif %}
+
+        <h3>Agregar nueva idea</h3>
+        <form method="POST" class="form-idea">
+            <input type="text" name="titulo" id="titulo" placeholder="Titulo">
+            <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion">
+            <input type="text" name="categoria" id="categoria" placeholder="Categoria">
+            <button type="submit" id="btn-agregar">Agregar</button>
+        </form>
+
+        <h3>Lista de ideas</h3>
+        <table id="tabla-ideas">
+            <tr>
+                <th>Titulo</th>
+                <th>Descripcion</th>
+                <th>Categoria</th>
+                <th>Acciones</th>
+            </tr>
+            {% for idea in ideas %}
+            <tr id="idea-{{ idea['id'] }}">
+                <td>{{ idea['titulo'] }}</td>
+                <td>{{ idea['descripcion'] }}</td>
+                <td>{{ idea['categoria'] }}</td>
+                <td>
+                    <a href="{{ url_for('editar', idea_id=idea['id']) }}" class="btn-editar">Editar</a>
+                    <a href="{{ url_for('eliminar', idea_id=idea['id']) }}" class="btn-eliminar"
+                       onclick="return confirm('Seguro que deseas eliminar esta idea?')">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestor de Ideas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="caja">
+        <h2>Iniciar Sesion</h2>
+
+        {% if error %}
+            <p class="error" id="mensaje-error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+            <label>Usuario:</label>
+            <input type="text" name="usuario" id="usuario">
+
+            <label>Contraseña:</label>
+            <input type="password" name="contrasena" id="contrasena">
+
+            <button type="submit" id="btn-login">Entrar</button>
+        </form>
+    </div>
+</body>
+</html>
