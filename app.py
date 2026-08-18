@@ -3,7 +3,7 @@ import sqlite3
 import os
 
 app = Flask(__name__)
-app.secret_key = "digite-la-clave" 
+app.secret_key = "clave-secreta-123"
 
 DB = os.path.join(os.path.dirname(__file__), "ideas.db")
 

@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 
 BASE_URL = "http://localhost:5000"
 
+
 def login(driver):
     driver.get(BASE_URL + "/login")
     driver.find_element(By.ID, "usuario").send_keys("admin")
@@ -18,6 +19,7 @@ def crear_idea(driver, titulo):
 
 
 def test_buscar_idea_camino_feliz(driver):
+    """Camino feliz: buscar una idea que existe en la lista"""
     login(driver)
     crear_idea(driver, "Idea Buscable")
 
@@ -30,6 +32,7 @@ def test_buscar_idea_camino_feliz(driver):
 
 
 def test_buscar_idea_prueba_negativa(driver):
+    """Prueba negativa: buscar una idea que no existe"""
     login(driver)
     driver.find_element(By.ID, "buscar").send_keys("NoExisteXYZ123")
     driver.find_element(By.ID, "btn-buscar").click()
@@ -40,6 +43,7 @@ def test_buscar_idea_prueba_negativa(driver):
 
 
 def test_buscar_idea_prueba_limites(driver):
+    """Prueba de limites: buscar con el campo vacio (debe mostrar todas las ideas)"""
     login(driver)
     crear_idea(driver, "Idea Cualquiera")
 

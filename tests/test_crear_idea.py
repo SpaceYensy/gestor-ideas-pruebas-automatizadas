@@ -13,6 +13,7 @@ def login(driver):
 
 
 def test_crear_idea_camino_feliz(driver):
+    """Camino feliz: crear una idea con todos los datos"""
     login(driver)
     driver.find_element(By.ID, "titulo").send_keys("Idea de prueba")
     driver.find_element(By.ID, "descripcion").send_keys("Descripcion de prueba")
@@ -25,6 +26,7 @@ def test_crear_idea_camino_feliz(driver):
 
 
 def test_crear_idea_prueba_negativa(driver):
+    """Prueba negativa: crear una idea sin titulo (campo obligatorio)"""
     login(driver)
     driver.find_element(By.ID, "descripcion").send_keys("Idea sin titulo")
     driver.find_element(By.ID, "btn-agregar").click()
@@ -35,6 +37,7 @@ def test_crear_idea_prueba_negativa(driver):
 
 
 def test_crear_idea_prueba_limites(driver):
+    """Prueba de limites: titulo con mas de 100 caracteres"""
     login(driver)
     titulo_largo = "a" * 150
     driver.find_element(By.ID, "titulo").send_keys(titulo_largo)
