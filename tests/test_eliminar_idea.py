@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 
 BASE_URL = "http://localhost:5000"
 
-
 def login(driver):
     driver.get(BASE_URL + "/login")
     driver.find_element(By.ID, "usuario").send_keys("admin")
@@ -11,8 +10,8 @@ def login(driver):
     driver.find_element(By.ID, "btn-login").click()
     time.sleep(1)
 
-
 def test_eliminar_idea_camino_feliz(driver):
+    """Camino feliz: eliminar una idea existente y confirmar"""
     login(driver)
     driver.find_element(By.ID, "titulo").send_keys("Idea a Eliminar")
     driver.find_element(By.ID, "btn-agregar").click()
@@ -27,8 +26,8 @@ def test_eliminar_idea_camino_feliz(driver):
     tabla = driver.find_element(By.ID, "tabla-ideas").text
     assert "Idea a Eliminar" not in tabla
 
-
 def test_eliminar_idea_prueba_negativa(driver):
+    """Prueba negativa: cancelar la eliminacion en el mensaje de confirmacion"""
     login(driver)
     driver.find_element(By.ID, "titulo").send_keys("Idea que no se elimina")
     driver.find_element(By.ID, "btn-agregar").click()
@@ -43,8 +42,8 @@ def test_eliminar_idea_prueba_negativa(driver):
     tabla = driver.find_element(By.ID, "tabla-ideas").text
     assert "Idea que no se elimina" in tabla
 
-
 def test_eliminar_idea_prueba_limites(driver):
+    """Prueba de limites: intentar eliminar una idea con un id que no existe"""
     login(driver)
     driver.get(BASE_URL + "/eliminar/999999")
     time.sleep(1)
